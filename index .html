@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduFuture - Smart Learning</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+body{
+background: linear-gradient(135deg,#0f172a,#1e3a8a,#7e22ce);
+overflow-x:hidden;
+}
+.glass{
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(15px);
+}
+.floating{
+position:absolute;
+border-radius:50%;
+filter:blur(60px);
+opacity:0.4;
+animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0px);}
+50%{transform:translateY(-30px);}
+}
+</style>
+</head>
+
+<body class="text-white scroll-smooth">
+
+<!-- Floating Background Shapes -->
+<div class="floating bg-pink-500 w-72 h-72 top-20 left-10"></div>
+<div class="floating bg-purple-500 w-96 h-96 bottom-10 right-10"></div>
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center p-6 glass fixed w-full z-50">
+<h1 class="text-2xl font-bold">📚 EduFuture</h1>
+</nav>
+
+<!-- HERO -->
+<section id="homeHero"
+class="min-h-screen flex flex-col md:flex-row items-center justify-between p-10 pt-32">
+
+<div class="md:w-1/2">
+<h2 class="text-5xl font-extrabold mb-6 leading-tight heroText">
+Empowering SHS Students <br>
+Through Smart Learning
+</h2>
+
+<p class="mb-6 text-lg heroText">
+Interactive lessons, smart quizzes, and digital tools.
+</p>
+
+<button onclick="showLevels()"
+class="bg-white text-indigo-700 px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:scale-110 transition heroBtn">
+Start Learning
+</button>
+</div>
+
+<div class="md:w-1/2 mt-10 md:mt-0 heroImage">
+<img src="https://images.unsplash.com/photo-1588072432836-e10032774350"
+class="rounded-3xl shadow-2xl w-full">
+</div>
+
+</section>
+
+<!-- SHS LEVELS -->
+<section id="levels"
+class="hidden min-h-screen flex flex-col justify-center items-center px-6">
+
+<h3 class="text-4xl font-bold mb-12 levelTitle">
+Choose Your Level
+</h3>
+
+<div class="grid md:grid-cols-3 gap-8 w-full max-w-5xl">
+
+<div onclick="showSubjects('SHS 1')"
+class="glass p-10 rounded-3xl text-center shadow-2xl hover:scale-105 transition cursor-pointer levelCard">
+<h4 class="text-2xl font-bold">SHS 1</h4>
+</div>
+
+<div onclick="showSubjects('SHS 2')"
+class="glass p-10 rounded-3xl text-center shadow-2xl hover:scale-105 transition cursor-pointer levelCard">
+<h4 class="text-2xl font-bold">SHS 2</h4>
+</div>
+
+<div onclick="showSubjects('SHS 3')"
+class="glass p-10 rounded-3xl text-center shadow-2xl hover:scale-105 transition cursor-pointer levelCard">
+<h4 class="text-2xl font-bold">SHS 3</h4>
+</div>
+
+</div>
+
+<button onclick="goHome()"
+class="mt-12 bg-white text-indigo-700 px-6 py-2 rounded-lg">
+Back Home
+</button>
+
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects"
+class="hidden min-h-screen flex flex-col justify-center items-center px-6">
+
+<h3 id="subjectTitle"
+class="text-4xl font-bold mb-12 subjectTitle">
+</h3>
+
+<div class="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
+
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Biology</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Physics</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Chemistry</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">English</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Social Studies</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Add Maths</div>
+<div class="glass p-8 rounded-3xl text-center shadow-xl subjectCard">Mathematics</div>
+
+</div>
+
+<button onclick="backToLevels()"
+class="mt-12 bg-white text-indigo-700 px-6 py-2 rounded-lg">
+Back To Levels
+</button>
+
+</section>
+
+<script>
+
+// HERO ANIMATION
+gsap.from(".heroText",{
+opacity:0,
+y:40,
+duration:1,
+stagger:0.3
+});
+
+gsap.from(".heroImage",{
+opacity:0,
+x:50,
+duration:1.2
+});
+
+gsap.from(".heroBtn",{
+scale:0,
+duration:0.8,
+delay:1
+});
+
+// SHOW LEVELS
+function showLevels(){
+document.getElementById("levels").classList.remove("hidden");
+document.getElementById("levels")
+.scrollIntoView({behavior:"smooth"});
+
+gsap.from(".levelCard",{
+opacity:0,
+y:50,
+stagger:0.2,
+duration:0.8
+});
+}
+
+// SHOW SUBJECTS
+function showSubjects(level){
+
+document.getElementById("levels").classList.add("hidden");
+document.getElementById("subjects").classList.remove("hidden");
+
+document.getElementById("subjectTitle").innerText =
+level + " Subjects";
+
+document.getElementById("subjects")
+.scrollIntoView({behavior:"smooth"});
+
+gsap.from(".subjectCard",{
+opacity:0,
+scale:0.8,
+stagger:0.15,
+duration:0.6
+});
+}
+
+// BACK FUNCTIONS
+function backToLevels(){
+document.getElementById("subjects").classList.add("hidden");
+document.getElementById("levels").classList.remove("hidden");
+}
+
+function goHome(){
+document.getElementById("levels").classList.add("hidden");
+document.getElementById("subjects").classList.add("hidden");
+document.getElementById("homeHero")
+.scrollIntoView({behavior:"smooth"});
+}
+
+</script>
+
+</body>
+</html>
