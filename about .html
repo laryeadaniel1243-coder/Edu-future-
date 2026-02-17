@@ -1,0 +1,202 @@
+# about.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - EduFuture</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+body{
+background: linear-gradient(135deg,#0f172a,#312e81,#7e22ce);
+}
+.glass{
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(15px);
+}
+</style>
+
+</head>
+
+<body class="text-white">
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center p-6 glass">
+<h1 class="text-2xl font-bold">📚 EduFuture</h1>
+
+<button onclick="goHome()"
+class="bg-white text-indigo-700 px-5 py-2 rounded-lg font-semibold hover:scale-105 transition">
+Back Home
+</button>
+</nav>
+
+<!-- HERO -->
+<section class="text-center py-20 px-6">
+<h2 class="text-5xl font-extrabold mb-6 reveal">
+Meet The Founder
+</h2>
+<p class="text-lg max-w-3xl mx-auto reveal">
+The visionary student transforming digital education.
+</p>
+</section>
+
+<!-- PROFILE -->
+<section class="px-6 pb-20">
+<div class="max-w-6xl mx-auto glass rounded-3xl shadow-2xl p-10 md:flex gap-10 reveal">
+
+<div class="md:w-1/3 mb-6 md:mb-0">
+<img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6"
+class="rounded-3xl shadow-2xl w-full">
+</div>
+
+<div class="md:w-2/3">
+
+<h3 class="text-3xl font-bold mb-4">
+Anum Daniel Laryea
+</h3>
+
+<p class="mb-4 text-lg leading-relaxed">
+Anum Daniel Laryea is the founder and developer of EduFuture,
+a smart digital learning platform designed to help Senior High
+School students excel academically using modern technology.
+</p>
+
+<p class="mb-4">
+He is a proud student of
+<span class="font-bold text-yellow-300">
+Ghana Senior High School
+</span>
+and currently in
+<span class="font-bold text-yellow-300">
+2 SCIENCE 3
+</span>.
+</p>
+
+<p>
+With a strong passion for science, mathematics, and innovation,
+he created EduFuture to support SHS 1, SHS 2, and SHS 3 students
+through AI-powered quizzes, digital books, and interactive learning.
+</p>
+
+</div>
+
+</div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="px-6 py-16">
+<h3 class="text-3xl font-bold text-center mb-12 reveal">
+Founder Achievements
+</h3>
+
+<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<h4 class="font-bold text-xl mb-3">💻 Web Innovation</h4>
+<p>Built a complete AI-powered education website independently.</p>
+</div>
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<h4 class="font-bold text-xl mb-3">🤖 AI Integration</h4>
+<p>Successfully integrated smart AI quiz generation system.</p>
+</div>
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<h4 class="font-bold text-xl mb-3">📚 Academic Excellence</h4>
+<p>Strong performance in Science and Mathematics subjects.</p>
+</div>
+
+</div>
+</section>
+
+<!-- AWARDS -->
+<section class="bg-white text-black py-16 px-6">
+
+<h3 class="text-3xl font-bold text-center mb-12 text-indigo-700 reveal">
+Awards & Certificates
+</h3>
+
+<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+<div class="bg-indigo-100 p-6 rounded-3xl shadow-lg reveal">
+<h4 class="font-bold mb-2">🏆 Academic Excellence Award</h4>
+<p>Recognized for outstanding academic achievements.</p>
+</div>
+
+<div class="bg-purple-100 p-6 rounded-3xl shadow-lg reveal">
+<h4 class="font-bold mb-2">🥇 Science Competition Certificate</h4>
+<p>Participant in inter-school science competitions.</p>
+</div>
+
+<div class="bg-pink-100 p-6 rounded-3xl shadow-lg reveal">
+<h4 class="font-bold mb-2">💡 Innovation Recognition</h4>
+<p>Honored for developing a digital education platform.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="px-6 py-20">
+
+<h3 class="text-3xl font-bold text-center mb-12 reveal">
+Student Testimonials
+</h3>
+
+<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<p class="mb-4">
+"EduFuture makes studying easier and more exciting!"
+</p>
+<h5 class="font-bold">— SHS Student</h5>
+</div>
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<p class="mb-4">
+"Amazing AI quiz feature. It really helps with exam preparation."
+</p>
+<h5 class="font-bold">— Science Student</h5>
+</div>
+
+<div class="glass p-6 rounded-3xl shadow-xl reveal">
+<p class="mb-4">
+"An inspiring student leader creating real change."
+</p>
+<h5 class="font-bold">— Mathematics Student</h5>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+// Smooth scroll back to homepage
+function goHome(){
+window.location.href = "index.html#homeHero";
+}
+
+// Scroll animations
+ScrollReveal().reveal('.reveal',{
+delay:200,
+distance:'50px',
+origin:'bottom',
+interval:150
+});
+
+gsap.from("h2",{
+opacity:0,
+y:-40,
+duration:1
+});
+
+</script>
+
+</body>
+</html>
