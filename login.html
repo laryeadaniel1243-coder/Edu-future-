@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - EduFuture</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body {
+background: linear-gradient(135deg,#0f172a,#1e3a8a,#7e22ce);
+overflow-x:hidden;
+}
+.glass {
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(15px);
+}
+.floating {
+position:absolute;
+border-radius:50%;
+filter:blur(70px);
+opacity:0.3;
+animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0px);}
+50%{transform:translateY(-40px);}
+}
+</style>
+</head>
+
+<body class="text-white flex flex-col items-center justify-center min-h-screen relative">
+
+<!-- Floating Background -->
+<div class="floating bg-pink-500 w-72 h-72 top-20 left-10 absolute"></div>
+<div class="floating bg-purple-500 w-96 h-96 bottom-10 right-10 absolute"></div>
+
+<!-- LOGIN CARD -->
+<div class="glass p-10 rounded-3xl shadow-2xl w-full max-w-md text-center">
+
+<h2 class="text-4xl font-bold mb-6 reveal">EduFuture Login</h2>
+
+<!-- Email -->
+<input type="email" id="email" placeholder="Email"
+class="w-full p-3 mb-4 rounded-lg text-black text-lg"/>
+
+<!-- Password -->
+<input type="password" id="password" placeholder="Password"
+class="w-full p-3 mb-4 rounded-lg text-black text-lg"/>
+
+<!-- Buttons -->
+<div class="flex flex-col gap-4">
+
+<button onclick="loginEmail()"
+class="bg-indigo-700 hover:bg-indigo-800 px-6 py-3 rounded-lg font-semibold shadow-lg reveal">
+Login
+</button>
+
+<button onclick="signUpEmail()"
+class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold shadow-lg reveal">
+Sign Up
+</button>
+
+<button onclick="googleLogin()"
+class="bg-red-500 hover:bg-red-600 px-6 py-3 rounded-lg font-semibold shadow-lg reveal">
+Sign in with Google
+</button>
+
+<button onclick="logout()"
+class="bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-lg font-semibold shadow-lg reveal">
+Logout
+</button>
+
+</div>
+
+<p class="mt-6 text-sm opacity-80 reveal">
+After login you can access courses, topics, quizzes and AI question generator.
+</p>
+
+</div>
+
+<script type="module">
+// Firebase setup
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-analytics.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQgK9igI9D8zSlBvt_mjiIR0umK1VSEHk",
+  authDomain: "brain-boost-673e1.firebaseapp.com",
+  projectId: "brain-boost-673e1",
+  storageBucket: "brain-boost-673e1.firebasestorage.app",
+  messagingSenderId: "417391967505",
+  appId: "1:417391967505:web:f15ca5e85ac1b3875520b0",
+  measurementId: "G-V37GZY921C"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// Email Sign-up
+window.signUpEmail = function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert(`Sign-up successful ✅ Welcome ${userCredential.user.email}`);
+      console.log(userCredential.user);
+    })
+    .catch((error) => alert(`Error ❌ ${error.message}`));
+}
+
+// Email Login
+window.loginEmail = function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert(`Login successful ✅ Welcome ${userCredential.user.email}`);
+      console.log(userCredential.user);
+    })
+    .catch((error) => alert(`Error ❌ ${error.message}`));
+}
+
+// Google Login
+window.googleLogin = function() {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      alert(`Google login successful ✅ Welcome ${user.displayName}`);
+      console.log(user);
+    })
+    .catch((error) => alert(`Error ❌ ${error.message}`));
+}
+
+// Logout
+window.logout = function() {
+  signOut(auth)
+    .then(() => alert("Logged out ✅"))
+    .catch((error) => alert(`Error ❌ ${error.message}`));
+}
+
+// Animate login card
+gsap.from(".reveal", {opacity:0, y:40, stagger:0.2, duration:0.8});
+</script>
+
+</body>
+</html>
