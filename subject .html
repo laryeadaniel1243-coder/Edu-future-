@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subjects - EduFuture</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body{
+background: linear-gradient(135deg,#0f172a,#312e81,#7e22ce);
+overflow-x:hidden;
+}
+.glass{
+background: rgba(255,255,255,0.1);
+backdrop-filter: blur(15px);
+}
+.floating{
+position:absolute;
+border-radius:50%;
+filter:blur(70px);
+opacity:0.3;
+animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0px);}
+50%{transform:translateY(-40px);}
+}
+</style>
+</head>
+
+<body class="text-white">
+
+<!-- Floating Background -->
+<div class="floating bg-pink-500 w-72 h-72 top-20 left-10 absolute"></div>
+<div class="floating bg-purple-500 w-96 h-96 bottom-10 right-10 absolute"></div>
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center p-6 glass">
+<h1 class="text-2xl font-bold">📚 EduFuture</h1>
+<a href="index.html"
+class="bg-white text-indigo-700 px-4 py-2 rounded-lg hover:scale-105 transition">
+Back Home
+</a>
+</nav>
+
+<!-- HEADER -->
+<section class="text-center py-16">
+<h2 id="levelTitle"
+class="text-5xl font-extrabold mb-6">
+</h2>
+<p class="text-lg opacity-80">
+Click a subject to view topics
+</p>
+</section>
+
+<!-- SUBJECT GRID -->
+<section id="subjectSection"
+class="px-6 pb-20">
+
+<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+<div onclick="openTopics('Biology')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Biology
+</div>
+
+<div onclick="openTopics('Physics')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Physics
+</div>
+
+<div onclick="openTopics('Chemistry')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Chemistry
+</div>
+
+<div onclick="openTopics('English')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+English
+</div>
+
+<div onclick="openTopics('Social Studies')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Social Studies
+</div>
+
+<div onclick="openTopics('Add Maths')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Add Maths
+</div>
+
+<div onclick="openTopics('Mathematics')" class="glass p-8 rounded-3xl text-center shadow-xl subjectCard cursor-pointer hover:scale-105 transition">
+Mathematics
+</div>
+
+</div>
+
+</section>
+
+<!-- TOPICS SECTION -->
+<section id="topicsSection"
+class="hidden px-6 pb-20">
+
+<h3 id="topicTitle"
+class="text-4xl font-bold text-center mb-10">
+</h3>
+
+<div id="topicsList"
+class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+</div>
+
+<div class="text-center mt-10">
+<button onclick="backToSubjects()"
+class="bg-white text-indigo-700 px-6 py-2 rounded-lg">
+Back to Subjects
+</button>
+</div>
+
+</section>
+
+<script>
+
+// Get level
+const level = localStorage.getItem("selectedLevel") || "SHS";
+document.getElementById("levelTitle").innerText =
+level + " Subjects";
+
+// Animate subjects
+gsap.from(".subjectCard",{
+opacity:0,
+y:50,
+stagger:0.15,
+duration:0.8
+});
+
+gsap.from("#levelTitle",{
+opacity:0,
+y:-40,
+duration:1
+});
+
+// Topic Data
+const topics = {
+Biology:[
+"Cell Biology",
+"Ecology",
+"Mammalian System",
+"Plant System"
+],
+Physics:[
+"Motion",
+"Wave Motion",
+"Optics",
+"Magnetism"
+],
+Chemistry:[
+"Introduction to Chemistry",
+"Mole Concept",
+"Periodic Properties"
+],
+English:[
+"Grammar",
+"Comprehension",
+"Essay Writing"
+],
+"Social Studies":[
+"Environment",
+"Governance",
+"Population"
+],
+"Add Maths":[
+"Logarithms",
+"Matrices",
+"Vectors"
+],
+Mathematics:[
+"Surds",
+"Linear Equations",
+"Coordinate Geometry"
+]
+};
+
+// Open Topics
+function openTopics(subject){
+
+document.getElementById("subjectSection").classList.add("hidden");
+document.getElementById("topicsSection").classList.remove("hidden");
+
+document.getElementById("topicTitle").innerText =
+subject + " Topics";
+
+const list = document.getElementById("topicsList");
+list.innerHTML="";
+
+topics[subject].forEach(topic=>{
+const div = document.createElement("div");
+div.className =
+"glass p-6 rounded-3xl shadow-xl text-center topicCard";
+div.innerText = topic;
+list.appendChild(div);
+});
+
+gsap.from(".topicCard",{
+opacity:0,
+scale:0.8,
+stagger:0.15,
+duration:0.6
+});
+}
+
+// Back
+function backToSubjects(){
+document.getElementById("topicsSection").classList.add("hidden");
+document.getElementById("subjectSection").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
